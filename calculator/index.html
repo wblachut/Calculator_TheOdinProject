@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head><title>Calculator ♾ WB(The Odin Project)</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron">
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-div" id="calc-div"> 
+        <input id="calc-view" placeholder="0" value="0" readonly>
+    </div>
+        <button class="important-btn" id="clr-btn">C</button>
+        <button class="important-btn" id="back-btn">⬅</button>
+        
+        <button class="opr-btn" id="perc-btn">%</button>
+        <button class="opr-btn" id="div-btn" value="/">÷</button>
+        <button class="opr-btn" id="mlt-btn" value="*">x</button>
+        <button class="opr-btn" id="sub-btn" value="-">-</button>
+        <button class="opr-btn" id="add-btn" value="+">+</button>
+        
+        <button class="eval-btn" id="eql-btn" value="=">=</button>
+        
+        <button class="num-btn" id="seven" value="7">7</button>
+        <button class="num-btn" id="eight" value="8">8</button>
+        <button class="num-btn" id="nine" value="9">9</button>
+        <button class="num-btn" id="four" value="4">4</button>
+        <button class="num-btn" id="five" value="5">5</button>
+        <button class="num-btn" id="six" value="6">6</button>
+        <button class="num-btn" id="one" value="1">1</button>
+        <button class="num-btn" id="two" value="2">2</button>
+        <button class="num-btn" id="three" value="3">3</button>
+        <button class="num-btn" id="zero" value="0">0</button>
+        <button class="num-btn" id="dec-btn" value=".">.</button>
+        <button class="num-btn" id="plusminus-btn" value="+/-">+/-</button>
+
+        by wblachut 06.2020
+    </div>
+</body>
+
+<script>
+const view = document.querySelector('#calc-view');
+const numberButtons = document.querySelectorAll('.num-btn');
+const operationButtons = document.querySelectorAll('.opr-btn');
+const evaluateButton = document.querySelector('.eval-btn');
+const clearButton = document.querySelector('#clr-btn');
+const backspaceButton = document.querySelector('#back-btn');
+
+numberButtons.forEach(numberButton => numberButton.addEventListener('click', populateDisplay));
+operationButtons.forEach(operationButton => operationButton.addEventListener('click', addOperationMark));
+// evaluateButton.addEventListener('click', operate;
+clearButton.addEventListener('click', clearDisplay);
+backspaceButton.addEventListener('click', deleteLast);
+
+function fibonacci(sequenceNumber) {
+    sequence = [1, 1];
+    for (let i = 2; i < sequenceNumber; i++) {
+        sequenceSum = sequence[i-1] + sequence[i-2];
+        sequence.push(sequenceSum)
+    }
+    return sequence;
+}
+
+// cacl ###########################################
+    calc = {
+
+add: function (a,b) {
+  return a+b; },
+
+subtract: function (a,b) {
+  return a-b; },
+
+sum: function (list) {
+  return list.reduce((a, b) => a + b, 0); },
+
+multiply: function (a,b) {
+return a*b; },
+
+divide: (a,b) => (b == 0) ? 'ERROR' : a / b,
+
+power: function (a,b) {
+  result = a**b
+return result; },
+
+percent: function (a) {
+return a / 100; }, 
+
+negative: function (a) {
+return (-a); },
+
+factorial: function (n) {
+    factorials = [1, 1];
+    for (let i = 2; i <= n; i++) {
+        result = factorials[i-1] * i;
+        factorials.push(result)
+    }return factorials[n];
+},
+} // end of calc #############################
+
+function operate() {
+  operator = operatorMemory;
+  a = calcMemory;
+  b = viewMemory;
+switch (operator) {
+  case '+':
+      return calc.add(a,b);
+   break;
+  case '-':
+      return calc.subtract(a,b);
+    break;
+  case '*':
+      return calc.multiply(a,b);
+   break;
+  case '/':
+      return calc.divide(a,b);
+    break;
+  case '++':
+      return calc.sum(a);
+   break;
+  case '**':
+      return calc.power(a,b);
+    break;
+  case '!':
+      return calc.factorial(a,b);
+   break;
+  case '%':
+      return calc.percent(a);
+    break;
+    case '+/-':
+      return calc.negative(a);
+   break;
+}
+ view.value = operate();
+}
+
+let calcMemory = '';
+let viewMemory = '';
+let opperationClicked = false;
+
+function populateDisplay() {
+  viewMemory = '';
+  if (opperationClicked == true) {
+    view.value = 0; }
+  if (view.value.length > 9) {
+    return
+  } else if (view.value > 999999999) {
+    view.value = 999999999;
+  } else if (view.value == 0) {
+    view.value = this.value;
+  } else if (view.value.includes('.') && this.value == '.') {
+    return
+  } else if (this.value == '+/-') {
+    view.value = - (view.value);
+  } else {
+    view.value = view.value + this.value;
+  }
+  viewMemory = view.value;
+  opperationClicked = false;
+return viewMemory;
+}
+
+
+function addOperationMark() {
+  operatorMemory = this.value;
+  opperationClicked = true;
+  calcMemory = viewMemory;
+return operatorMemory, calcMemory
+}
+
+function clearDisplay(e) {
+  view.value = 0;
+  calcMemory = 0;
+  opperationClicked = false;
+}
+
+function deleteLast(e) {
+  view.value = view.value.slice(0,-1);
+
+}
+</script>
+
+</html>
