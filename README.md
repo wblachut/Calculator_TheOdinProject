@@ -1,4 +1,4 @@
-# calculator
+# Calculator
 Calculator (The Odin Project) by wblachut 
 
 
