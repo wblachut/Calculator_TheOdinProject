@@ -1,4 +1,12 @@
 <!doctype html>
+
+<!-- by wblachut 06.2020 
+  
+  to do:  
+  Add Keyboard support ??????? 
+  add hidden function to fibbonaci?
+-->
+
 <html lang="en">
   <head><title>Calculator ♾ WB(The Odin Project)</title>
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -32,8 +40,6 @@
         <button class="num-btn" id="zero" value="0">0</button>
         <button class="num-btn" id="dec-btn" value=".">.</button>
         <button class="num-btn" id="plusminus-btn" value="+/-">+/-</button>
-
-        by wblachut 06.2020
     </div>
 </body>
 
@@ -186,6 +192,9 @@ function evaluate() {
   view.value = previousOperand;
   operationClicked = true;
   operationEvaluated = true;
+  }
+  if (view.value.length > 9) {
+    view.value = (+view.value).toPrecision(7); 
   }
   console.log(`previousOperand =  ${previousOperand},  ${operatorMemory}, currentOperand = ${currentOperand}`);
 
