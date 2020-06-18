@@ -1,0 +1,119 @@
+/* 
+Use apple calculator as a reference point
+*/
+body {
+  background-color: #3f3f3f;
+}
+
+::placeholder {
+  color: rgb(0, 0, 0);
+}
+input {
+  background-color: #bad376;
+  border: 1px solid rgb(100,100,100);
+  border-radius: 1rem;
+  color: rgb(0, 0, 0);
+  font: large helvetica;
+  font-family: orbitron;
+  font-weight: 600;
+  margin: 8px;
+  text-align: right;
+  width: 92%;
+  height: 82%;
+  padding-right: 20px;
+  font-size: 50px;
+}
+
+button {
+  border: 1px solid #585858;
+  color: rgb(255, 255, 255);
+  font: bold large helvetica;
+  /* text-shadow: 0 0 5px #000000; */
+  font-size: 40px;
+  outline: none;
+  margin: 4px;
+  border-radius: 1rem;
+}
+
+button:hover {
+  background-color: firebrick;
+}
+
+.num-btn:hover, .dec-btn:hover, .plmin-btn:hover, #perc-btn:hover {
+  background-color: rgb(179, 179, 179);
+}
+
+.opr-btn:hover {
+  background-color: rgb(190, 180, 28);
+}
+
+#eql-btn {
+  background-color: rgb(68, 165, 84);
+}
+
+#eql-btn:hover {
+  background-color: rgb(0, 219, 55);
+}
+
+.container {
+  background-color: rgb(122, 122, 122);
+  height: 70vh;
+  width: 60vh;
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(4, auto);
+  row-gap: 0;
+  column-gap: 0;
+  border-radius: 1rem;
+  padding: 1%;
+  grid-template-areas:
+      "input input input input"
+      "clr sign perc div"
+      "seven eight nine mult"
+      "four five six minus"
+      "one two three plus"
+      "zro dec pm-btn eql";    
+    position: relative;
+    top: 15vh;
+}
+.important-btn {
+  background-color: rgba(231, 0, 0, 0.466);
+}
+.num-btn, .dec-btn, .plmin-btn, #perc-btn {
+  background-color: rgb(141, 141, 141);
+}
+.opr-btn:focus {
+  background-color: rgb(190, 180, 28);
+}
+.opr-btn {
+  background-color: rgba(187, 155, 11, 0.685);
+}
+.input-div {
+  grid-area: input;
+}
+
+#calc-view {
+  grid-area: input;
+}
+
+#div-btn {
+  grid-area: div;
+}
+#mlt-btn {
+  grid-area: mult;
+}
+#sub-btn {
+  grid-area: minus;
+}
+#add-btn {
+  grid-area: plus;
+}
+#eql-btn {
+  grid-area: eql;
+}
+#zero {
+  grid-area: zro;
+}
+#dec-btn {
+  grid-area: dec;
+}

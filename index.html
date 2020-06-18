@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head><title>Calculator ♾ WB(The Odin Project)</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron">
+  </head>
+  <body>
+    <div class="container">
+      <div class="input-div" id="calc-div"> 
+        <input id="calc-view" placeholder="0" value="0" readonly>
+    </div>
+        <button class="important-btn" id="clr-btn">AC</button>
+        <button class="important-btn" id="back-btn">⬅</button>
+        
+        <button id="perc-btn">%</button>
+        <button class="opr-btn" id="div-btn" value="/">÷</button>
+        <button class="opr-btn" id="mlt-btn" value="*">x</button>
+        <button class="opr-btn" id="sub-btn" value="-">-</button>
+        <button class="opr-btn" id="add-btn" value="+">+</button>
+        
+        <button class="eval-btn" id="eql-btn" value="=">=</button>
+        
+        <button class="num-btn" id="seven" value="7">7</button>
+        <button class="num-btn" id="eight" value="8">8</button>
+        <button class="num-btn" id="nine" value="9">9</button>
+        <button class="num-btn" id="four" value="4">4</button>
+        <button class="num-btn" id="five" value="5">5</button>
+        <button class="num-btn" id="six" value="6">6</button>
+        <button class="num-btn" id="one" value="1">1</button>
+        <button class="num-btn" id="two" value="2">2</button>
+        <button class="num-btn" id="three" value="3">3</button>
+        <button class="num-btn" id="zero" value="0">0</button>
+        <button class="num-btn" id="dec-btn" value=".">.</button>
+        <button class="num-btn" id="plusminus-btn" value="+/-">+/-</button>
+
+        by wblachut 06.2020
+    </div>
+</body>
+
+<script>
+
+function fibonacci(sequenceNumber) {
+    sequence = [1, 1];
+    for (let i = 2; i < sequenceNumber; i++) {
+        sequenceSum = sequence[i-1] + sequence[i-2];
+        sequence.push(sequenceSum)
+    } return sequence;
+}
+// cacl ##############################################################################
+    calc = {
+add: function (a,b) {
+  return a+b; },
+subtract: function (a,b) {
+  return a-b; },
+sum: function (list) {
+  return list.reduce((a, b) => a + b, 0); },
+multiply: function (a,b) {
+return a*b; },
+divide: (a,b) => (b == 0) ? 'ERROR' : a / b,
+power: function (a,b) {
+  result = a**b
+return result; },
+percent: function (a) {
+return a / 100; }, 
+negative: function (a) {
+return (-a); },
+factorial: function (n) {
+    factorials = [1, 1];
+    for (let i = 2; i <= n; i++) {
+        result = factorials[i-1] * i;
+        factorials.push(result)
+    }return factorials[n];
+}} // end of calc #########################################################################
+
+function operate(operator, a, b) {
+switch (operator) {
+  case '+':
+      return result = calc.add(+a,+b);
+   break;
+  case '-':
+      return result = calc.subtract(a,b);
+    break;
+  case '*':
+      return result = calc.multiply(a,b);
+   break;
+  case '/':
+      return result = calc.divide(a,b);
+    break;
+  case '++':
+      return result = calc.sum(a);
+   break;
+  case '**':
+      return result = calc.power(a,b);
+    break;
+  case '!':
+      return result = calc.factorial(a,b);
+   break;
+  case '%':
+      return result = calc.percent(a);
+    break;
+    case '+/-':
+      return result = calc.negative(a);
+   break;
+}}
+
+const view = document.querySelector('#calc-view');
+const numberButtons = document.querySelectorAll('.num-btn');
+const operationButtons = document.querySelectorAll('.opr-btn');
+const evaluateButton = document.querySelector('.eval-btn');
+const clearButton = document.querySelector('#clr-btn');
+const backspaceButton = document.querySelector('#back-btn');
+const percentButton = document.querySelector('#perc-btn');
+
+numberButtons.forEach(numberButton => numberButton.addEventListener('click', populateDisplay));
+operationButtons.forEach(operationButton => operationButton.addEventListener('click', addOperationMark));
+evaluateButton.addEventListener('click', evaluate);
+clearButton.addEventListener('click', clearDisplay);
+backspaceButton.addEventListener('click', deleteLast);
+percentButton.addEventListener('click', percentageValue);
+
+let previousOperand = '';
+let currentOperand = '';
+let operatorMemory = undefined;
+let operationClicked = false;
+let operationEvaluated = false;
+
+function populateDisplay() {
+  if (operationClicked == true && this.value !== '+/-') {
+    view.value = 0; }
+  if (view.value.length > 9) {
+    return
+  } else if (view.value > 999999999) {
+    view.value = 999999999;
+  } else if (view.value == 0 && this.value !== '+/-') {
+    view.value = this.value;
+  } else if (view.value.includes('.') && this.value == '.') {
+    return
+  } else if (this.value == '+/-') {
+    view.value = 0 - (+view.value);
+    operationEvaluated == true;
+  } else {
+    view.value = (view.value) + (this.value);
+  }
+  currentOperand = (view.value);
+  operationClicked = false;
+  operationEvaluated = false;
+return
+}
+
+function addOperationMark() {
+  if (operationEvaluated == false && operatorMemory !== undefined) {
+    console.log('here')
+    evaluate();
+
+    console.log(`previousOperand =  ${previousOperand} now !!`);
+    view.value = previousOperand;
+    operatorMemory = this.value;
+  } else if (operationEvaluated == true || operatorMemory !== undefined) {
+    previousOperand = +view.value
+    operatorMemory = this.value;
+    operationClicked = true;
+  } else {
+  operatorMemory = this.value;
+  operationClicked = true;
+  previousOperand = +currentOperand;
+   } console.log(`previousOperand =  ${previousOperand},  ${operatorMemory}, currentOperand = ${currentOperand}`);
+}
+
+function clearDisplay(e) {
+  view.value = '';
+  currentOperand = '';
+  previousOperand = '';
+  operatorMemory = undefined;
+}
+
+function deleteLast(e) {
+  view.value = view.value.slice(0,-1);
+  currentOperand = view.value.slice(0,-1);
+  operatorMemory = undefined;
+}
+
+function evaluate() {
+  if (operatorMemory !== undefined) {
+  [operator, a, b] = [operatorMemory, previousOperand, currentOperand];
+  previousOperand = +operate(operator, a, b);
+  view.value = previousOperand;
+  operationClicked = true;
+  operationEvaluated = true;
+  }
+  console.log(`previousOperand =  ${previousOperand},  ${operatorMemory}, currentOperand = ${currentOperand}`);
+
+}
+function percentageValue() {
+  previousOperand = currentOperand;
+  currentOperand = view.value / 100;
+  view.value = view.value / 100;
+  previousOperand = 0;
+  operationClicked = false;
+  operatorMemory = undefined;
+}
+</script>
+
+</html>
