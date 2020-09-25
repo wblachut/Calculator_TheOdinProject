@@ -1,5 +1,5 @@
 # Calculator
-Calculator (The Odin Project) by wblachut 
+Calculator (The Odin Project)
 
 
 ** Add Keyboard support?
